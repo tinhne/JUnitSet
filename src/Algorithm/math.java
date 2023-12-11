@@ -1,7 +1,7 @@
 package Algorithm;
 
 public class math {
-    public static boolean isPrimeNumber(int n) {
+    public boolean isPrimeNumber(int n) {
         if (n < 2) {
             return false;
         }

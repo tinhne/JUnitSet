@@ -4,9 +4,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,10 +38,8 @@ class mathTest {
         int result = m.multiplication(5, 7);
         assertEquals(result, 35);
     }
-
-    static Object[] getPrimeNumbersFromExcel() throws IOException {
-        return (Object[]) ExcelDataReader.readTestData("/Users/levantrungtinhgmail.com/Downloads/PrimeNumber.xlsx","PrimeNumber")[0];
+    static Stream<Arguments> getPrimeNumbersFromExcel() throws IOException {
+        List<List<Integer>> testData = ExcelDataReader.readTestData("C:\\Users\\Administrator\\IdeaProjects\\JUnitSet\\Book1.xlsx", "Sheet1");
+        return testData.stream().map(data -> Arguments.of(data.toArray()));
     }
-
-
 }
