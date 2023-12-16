@@ -27,11 +27,19 @@ class mathTest {
         m = null;
     }
 
+//    @ParameterizedTest
+//    @MethodSource("getPrimeNumbersFromExcel")
+//    void TestPrimeNumber(int number) {
+//        assertTrue(m.isPrimeNumber(number));
+//    }
     @ParameterizedTest
     @MethodSource("getPrimeNumbersFromExcel")
-    void TestPrimeNumber(int number) {
-        assertTrue(m.isPrimeNumber(number));
+    void TestPrimeNumber(List<Integer> data) {
+        for (int number : data) {
+            assertTrue(m.isPrimeNumber(number));
+        }
     }
+
 
     @Test
     void multiplication() {
@@ -40,6 +48,7 @@ class mathTest {
     }
     static Stream<Arguments> getPrimeNumbersFromExcel() throws IOException {
         List<List<Integer>> testData = ExcelDataReader.readTestData("C:\\Users\\Administrator\\IdeaProjects\\JUnitSet\\Book1.xlsx", "Sheet1");
-        return testData.stream().map(data -> Arguments.of(data.toArray()));
+        return testData.stream().map(Arguments::of);
     }
+
 }
